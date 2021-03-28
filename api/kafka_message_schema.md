@@ -128,6 +128,7 @@ Currently there are two feeds available.
 
 *See message API details for the list of headers that will be included*
 
+
 Message API: Parsed Data
 ------------------------
 
@@ -189,6 +190,7 @@ One or more BMP routers.
 11 | Timestamp | String | 26 | In the format of: YYYY-MM-dd HH:MM:SS.ffffff
 12 | BGP-ID | String | 46 | Printed form of the router local BGP ID (IP address)
 
+
 ### Object: <font color="blue">peer</font> (openbmp.parsed.peer)
 One or more BGP peers.
 
@@ -231,7 +233,7 @@ One or more BGP peers.
 
 \*\* *Only available in PEER_DOWN (action=down), other actions will set these fields to null/empty*
 
-### Object: <font color="blue">bmp\_stat</font> (openbmp.parsed.bmp\_stat)
+### Object: <font color="blue">bmp_stat</font> (openbmp.parsed.bmp_stat)
 One or more bmp stat reports.
 
 \# | Field | Data Type | Size in Bytes | Details
@@ -255,7 +257,7 @@ One or more bmp stat reports.
 17 | Prefixes Post Policy | Int | 8 | Prefixes post-policy (Adj-RIB-In) - All address families
 
 
-### Object: <font color="blue">base\_attribute</font> (openbmp.parsed.base\_attribute)
+### Object: <font color="blue">base_attribute</font> (openbmp.parsed.base_attribute)
 One or more attribute sets (does not include the NLRI's)
 
 \# | Field | Data Type | Size in Bytes | Details
@@ -285,7 +287,9 @@ One or more attribute sets (does not include the NLRI's)
 23 | Originator Id | String | 46 | Originator ID in printed form (IP)
 24 | Large Community List | String | 8K | String from of large communities
 
-### Object: <font color="blue">unicast\_prefix</font> (openbmp.parsed.unicast\_prefix)
+
+### Object: <font color="blue">unicast_prefix</font> (openbmp.parsed.unicast_prefix)
+
 One or more IPv4/IPv6 unicast prefixes.
 
 \# | Field | Data Type | Size in Bytes | Details
@@ -325,7 +329,7 @@ One or more IPv4/IPv6 unicast prefixes.
 
 
 
-### Object: <font color="blue">ls\_node</font> (openbmp.parsed.ls\_node)
+### Object: <font color="blue">ls_node</font> (openbmp.parsed.ls_node)
 One or more link-state nodes.
 
 \# | Field | Data Type | Size in Bytes | Details
@@ -359,7 +363,7 @@ One or more link-state nodes.
 27 | SR-Capabilities TLV | String | 255 | SR-Capabilities TLV in the format of **[FLAGS] \<list of [Range Size] [Base SID/Label Type]\>**.  List is delimited by comma. 
 
 
-### Object: <font color="blue">ls\_link</font> (openbmp.parsed.ls\_link)
+### Object: <font color="blue">ls_link</font> (openbmp.parsed.ls_link)
 One or more link-state links.
 
 \# | Field | Data Type | Size in Bytes | Details
@@ -411,7 +415,8 @@ One or more link-state links.
 45 | isAdjIn | Bool | 1 | Indicates if LS link BGP prefix is Adj-RIB-In or Adj-RIB-Out
 46 | Adjacency Segment Identifier | String | 255 | Delimited by comma list of Adjacency Segment Identifier in the format of **[FLAGS] [Weight] [SID/Label]**.  Flags are different by protocol, see [draft-gredler-idr-bgp-ls-segment-routing-ext](https://tools.ietf.org/html/draft-gredler-idr-bgp-ls-segment-routing-ext-04#section-2.2.1) for more details. 
 
-### Object: <font color="blue">ls\_prefix</font> (openbmp.parsed.ls\_prefix)
+
+### Object: <font color="blue">ls_prefix</font> (openbmp.parsed.ls_prefix)
 One or more link-state prefixes.
 
 \# | Field | Data Type | Size in Bytes | Details
