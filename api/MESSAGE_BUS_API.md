@@ -6,11 +6,11 @@
 ## Version Changes
 
 ### Changes in 1.7
-    * Added BGP Large Communities support (RFC8092)
-        * **base_attribute** field 24 added
-        * **unicast_prefixes** field 32 added
-        * **l3vpn** field 34 added
-        * **evpn** field 40 added
+* Added BGP Large Communities support (RFC8092) 
+  * **base_attribute** field 24 added
+  * **unicast_prefixes** field 32 added
+  * **l3vpn** field 34 added
+  * **evpn** field 40 added
 
 ### Changes in 1.6
 * **peer**
