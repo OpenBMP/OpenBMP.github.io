@@ -6,6 +6,8 @@ nav_exclude: false
 search_exclude: false
 ---
 
+# Kafka Message Schema
+
 > #### Current Version 1.7
 
 
