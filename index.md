@@ -47,7 +47,7 @@ There are many reasons to use OpenBMP, but to highlight a few common ones:
 
 * **Centralized BMP Collector** - OpenBMP is a producer to Kafka.  You can write your own consumer
   or use an existing one.  Other products can interact with OpenBMP via Apache Kafka for RAW
-  BMP streams or the parsed messages.   See [Message Bus API Specification](api/MESSAGE_BUS_API.md) for more details.
+  BMP streams or the parsed messages.   See [Message Bus API Specification](api/kafka_message_schema.md) for more details.
 
 * **Real-Time Topology Monitoring** - Can monitor and alert on topology change, policy changes or lack of enforcement, route-leaking, hijacking, etc.
 

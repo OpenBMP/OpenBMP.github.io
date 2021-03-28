@@ -1,4 +1,10 @@
-# Message Bus API Specification
+---
+title: Kafka Message Schema
+excerpt: Kafka Message Schema
+nav_order: 2
+nav_exclude: false
+search_exclude: false
+---
 
 > #### Current Version 1.7
 
