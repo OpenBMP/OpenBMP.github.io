@@ -8,7 +8,7 @@ search_exclude: false
 
 # Kafka Message Schema
 
-> #### Current Version 1.7
+> **Current Version 1.7**
 
 
 ## Version Changes
