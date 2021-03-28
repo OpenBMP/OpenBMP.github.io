@@ -14,74 +14,73 @@
 
 ### Changes in 1.6
 * **peer**
-    * Added three new fields per [draft-ietf-grow-bmp-loc-rib](https://tools.ietf.org/html/draft-ietf-grow-bmp-local-rib-00): 
-       * **isLocRib**  - Boolean to indicate if the peer is for local RIB 
-       * **isLocRibFiltered** - Boolean to indicate if local rib is filtered in some way
-       * **tableName** - Peer table/VRF name. This is the name of the table/vrf for the RD.  This is 
-       only in PEER UP.
+  * Added three new fields per [draft-ietf-grow-bmp-loc-rib](https://tools.ietf.org/html/draft-ietf-grow-bmp-local-rib-00): 
+    * **isLocRib**  - Boolean to indicate if the peer is for local RIB 
+    * **isLocRibFiltered** - Boolean to indicate if local rib is filtered in some way
+    * **tableName** - Peer table/VRF name. This is the name of the table/vrf for the RD.  This is 
+      only in PEER UP.
        
 * Message Headers
-    * **T** header with the value of **message object type** has been added
+  * **T** header with the value of **message object type** has been added
 
 ### Changes in 1.5
 
 * **evpn**
-    * Added EVPN object - Implementation of https://tools.ietf.org/html/rfc7432
+  * Added EVPN object - Implementation of https://tools.ietf.org/html/rfc7432
     
 * **l3vpn**
-    * Added L3VPN object - Implementation of https://tools.ietf.org/html/rfc4364
+  * Added L3VPN object - Implementation of https://tools.ietf.org/html/rfc4364
 
 ### Changes in 1.4
 
 * **ls_node**
-    * Added **field 27** - Segment Routing Capabilities TLV
+  * Added **field 27** - Segment Routing Capabilities TLV
      
 * **ls_link**
-    * Added **field 46** - Adjacency Segment Identifier
+  * Added **field 46** - Adjacency Segment Identifier
 
 * **ls_prefix**
-    * Added **field 34** - Prefix-SID TLV
+  * Added **field 34** - Prefix-SID TLV
 
 ### Changes in 1.3
 
 * **unicast_prefix**
-    * Added **field 30** - Flag indicating if unicast BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
-    * Added **field 31** - Flag indicating if unicast BGP prefix is Adj-RIB-In or Adj-RIB-Out
+  * Added **field 30** - Flag indicating if unicast BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
+  * Added **field 31** - Flag indicating if unicast BGP prefix is Adj-RIB-In or Adj-RIB-Out
 
 * **ls_node**
-    * Added **field 25** - Flag indicating if LS node BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
-    * Added **field 26** - Flag indicating if LS node BGP prefix is Adj-RIB-In or Adj-RIB-Out
+  * Added **field 25** - Flag indicating if LS node BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
+  * Added **field 26** - Flag indicating if LS node BGP prefix is Adj-RIB-In or Adj-RIB-Out
 
 * **ls_link**
-    * Added **field 44** - Flag indicating if LS link BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
-    * Added **field 45** - Flag indicating if LS link BGP prefix is Adj-RIB-In or Adj-RIB-Out
+  * Added **field 44** - Flag indicating if LS link BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
+  * Added **field 45** - Flag indicating if LS link BGP prefix is Adj-RIB-In or Adj-RIB-Out
 
 * **ls_prefix**
-    * Added **field 32** - Flag indicating if LS prefix BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
-    * Added **field 33** - Flag indicating if LS prefix BGP prefix is Adj-RIB-In or Adj-RIB-Out
+  * Added **field 32** - Flag indicating if LS prefix BGP prefix is Pre-Policy Adj-RIB-In or Post-Policy Adj-RIB-In
+  * Added **field 33** - Flag indicating if LS prefix BGP prefix is Adj-RIB-In or Adj-RIB-Out
 
 
 ### Changes in 1.2
 
 * **ls_link**
-    * Added **field 39** - printed form of the Remote IGP router Id (varies in size depending on protocol)
-    * Added **field 40** - Printed form of the Remote router Id.  When EPE, this is the Remote BGP Router ID.
-    * Added **field 41** - Local Node descriptor ASN
-    * Added **field 42** - Remote Node descriptor ASN
-    * Added **field 43** - Peer node SID in the format of [L] <weight> <label/idx/ipv4>. L is only set when L flag is set.
+  * Added **field 39** - printed form of the Remote IGP router Id (varies in size depending on protocol)
+  * Added **field 40** - Printed form of the Remote router Id.  When EPE, this is the Remote BGP Router ID.
+  * Added **field 41** - Local Node descriptor ASN
+  * Added **field 42** - Remote Node descriptor ASN
+  * Added **field 43** - Peer node SID in the format of [L] <weight> <label/idx/ipv4>. L is only set when L flag is set.
 
 * **router**
-    * Added **field 12** - Printed form of the router local BGP ID (IP address)
+  * Added **field 12** - Printed form of the router local BGP ID (IP address)
     
 
 ### Changes in 1.1
 
 * **unicast_prefix** 
-
-    * Added **field 28** - Additional Paths ID - non-zero if add paths is enabled/used
-    * Added **field 29** - Command delimited list of labels - used for labeled unicast
-    * Changed hash_id to include path ID only if non-zero
-    * Changed hash_id to include the value 1 if labels are used.
+  * Added **field 28** - Additional Paths ID - non-zero if add paths is enabled/used
+  * Added **field 29** - Command delimited list of labels - used for labeled unicast
+  * Changed hash_id to include path ID only if non-zero
+  * Changed hash_id to include the value 1 if labels are used.
 
 
 Types of Message Feeds
@@ -92,8 +91,8 @@ Currently there are two feeds available.
 
 * Parsed messages are BMP and BGP messages parsed in a format that can be consumed by most analytics
 * Messages have two parts:
-    * Headers
-    * Data
+  * Headers
+  * Data
 * Data is conveyed in a denormalized **TSV** format (see each object data format for TSV syntax details)
 * TSV (tab separated values, like CSV) records are in sequence for ordered consumption
 * Hash ID's are used to correlate related records between objects
