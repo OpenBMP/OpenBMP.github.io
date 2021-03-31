@@ -35,17 +35,6 @@ search:
   # Supports true or false (default)
   button: false
 
-lsi: false
-safe: true
-source: 'https://github.com/openbnmp'
-incremental: false
-highlighter: rouge
-gist:
-  noscript: false
-kramdown:
-  math_engine: mathjax
-  syntax_highlighter: rouge
-
 readme_index:
   with_frontmatter: true
 
