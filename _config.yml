@@ -4,8 +4,6 @@ title: OpenBMP
 lang: en
 description: OpenBMP Documentation
 url: "https://www.openbmp.org"
-source: "/OpenBMP"
-baseurl: "/"
 lang: en
 
 lsi: true
@@ -13,6 +11,7 @@ safe: true
 
 readme_index:
   with_frontmatter: true
+  show_sorted: false
 
 
 exclude:
