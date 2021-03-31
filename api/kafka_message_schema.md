@@ -1,7 +1,6 @@
 ---
 title: Kafka Message Schema
 sort: 5
-show_sorted: false
 ---
 
 # Kafka Message Schema

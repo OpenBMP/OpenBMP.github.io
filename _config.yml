@@ -11,8 +11,8 @@ safe: true
 
 readme_index:
   with_frontmatter: true
-  show_sorted: false
 
+show_sorted: false
 
 exclude:
   - Makefile

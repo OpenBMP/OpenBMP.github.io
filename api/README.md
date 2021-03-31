@@ -1,6 +1,5 @@
 ---
 sort: 4
-show_sorted: false
 ---
 
 # APIs

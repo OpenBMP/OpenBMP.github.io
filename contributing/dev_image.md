@@ -1,7 +1,6 @@
 ---
 title: Developer Image
 sort: 7
-show_sorted: false
 ---
 # OpenBMP Developer Image
 
