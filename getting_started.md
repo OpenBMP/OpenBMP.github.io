@@ -47,7 +47,7 @@ RPKI validator requires greater than 2GB RAM. It is also CPU intensive at times.
 for a better memory and cpu focused implementation.   
 
 ## Docker Containers
-There are several docker containers defined in [docker-compose](https://github.com/OpenBMP/obmp-docker/blob/main/docker-compose.yml).
+There are several docker containers defined in [OpenBMP docker-compose.yml](https://github.com/OpenBMP/obmp-docker/blob/main/docker-compose.yml).
 
 These containers can be distributed over more than one VM/host.  These can also be added to kubernetes clusters, but make
 sure that you have the IOPS needed for PostgreSQL.  
@@ -66,10 +66,10 @@ will need to configure in your postgres cluster.
 * Follow the [Docker Install](https://docs.docker.com/installation/) to install a current version of docker.  
 * Follow the [Docker Compose Install](https://docs.docker.com/compose/install/) to install a current version of docker-compose.
 
-### (2) Git Clone required repos
+### (2) Download Files
 
 ```
-git clone https://github.com/OpenBMP/obmp-docker.git
+wget https://raw.githubusercontent.com/OpenBMP/obmp-docker/main/docker-compose.yml 
 git clone https://github.com/OpenBMP/obmp-grafana.git
 ```
 
@@ -82,6 +82,7 @@ Normally we place everything in ```/var/openbmp```, but you can place it anywher
 ```
 export OBMP_DATA_ROOT=/var/openbmp
 sudo mkdir -p $OBMP_DATA_ROOT
+sudo chmod -R 7777 $OBMP_DATA_ROOT
 ```
 
 #### (3.b) Create sub-directories
@@ -101,9 +102,119 @@ mkdir -p ${OBMP_DATA_ROOT}/zk-log
 mkdir -p ${OBMP_DATA_ROOT}/postgres/data
 mkdir -p ${OBMP_DATA_ROOT}/postgres/ts
 mkdir -p ${OBMP_DATA_ROOT}/grafana
-mkdir -p ${OBMP_DATA_ROOT}/grafana/dashboards
 
-sudo chmod -R 7777 $OBMP_DATA_ROOT
+chmod -R 7777 $OBMP_DATA_ROOT/*
 ```
 
-### (4) 
+### (4) Copy Grafana Provisioning
+Copy the grafana provisioning data from the repo to the ```${OBMP_DATA_ROOT}/grafana``` directory. 
+
+```
+cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
+```
+
+> **NOTE**:
+> Repeat the above when grafana provisioning has changed.
+
+
+### (5) Customize the docker-compose.yml settings
+Edit the ```docker-compose.yml``` file and tune the config for your deployment.
+
+* Change the **MEM** environment variable value (in GB) based on your install in both
+  the ```psql``` and ```psql-app``` containers. 
+
+
+### (6) Run OpenBMP docker-compose.yml
+
+```
+OBMP_DATA_ROOT=/var/openbmp docker-compose -f ./docker-compose.yml -p obmp up -d
+```
+
+Containers will restart if they crash or if the system is rebooted.
+
+### (7) Set grafana home
+
+* Login to grafana via http://<ip/hostname>:3000/
+* Click the link at the bottom left (above the help icon) to **Sign In**.
+* Sign in as **admin** using the password in the compose file
+* Click on the dashbard icon (middle left) and select **Manage**
+* Click on **Home** to open that dashoard
+* In the upper left, next to the dashboad name of **Home** there is a **star** icon. Click that. 
+* Click on the user icon (same to sign in) and select **Preferences**
+* Under **Preferences** select **Home** from the **Home Dashboard** list. 
+* Click Save. 
+
+Now when you login, the home dashboard will be set.
+
+> TODO: Will try to fix this via grafana provisioning or similar.
+
+
+### (8) Verify
+
+You should have a similar output as below:
+
+```
+```
+
+You should be able to login to grafana at http://<vm ip/name>:3000/
+
+
+### (9) Configure Routers
+Configure routers to send BMP to ```<vm ip/hostname> port 5000```
+
+
+- - -
+
+
+
+## Troubleshooting
+
+### Check Consumer Lag
+
+```
+docker exec -it obmp-psql-app /bin/bash
+kafka-tools -b obmp-kafka:29092 print_consumer_lag openbmp.parsed.unicast_prefix obmp-psql-consumer
+```
+
+You should see positive numbers in the offset columns and a lag normally less than a few thousand. 
+When you have a lot of peers that are all RIB dumping at the same time, the lag might be in the
+millions. This should not last too long and it should normalize where you see a lag less than 1000.
+
+### Clear and start a container
+
+```
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp stop <container/service>
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp rm <container/service>
+
+# Optionally also remove the image
+# docker rmi <image name>:<tag>
+
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp up -d <container/service>
+```
+
+### Shutdown and remove all containers
+
+```
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp down
+```
+
+### Restart a container 
+
+```
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp stop <container>
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp start <container>
+
+# Use the below if you want to recreate and start it 
+OBMP_DATA_ROOT=/var/openbmp docker-compose -p obmp up -d <container>
+```
+
+
+### Fix issues relating to persistent data
+Sometimes persistent data can become a problem for a container.  You can attempt to fix it or 
+just purge the data and start over. 
+
+To purge and start over, start by purging only the specific data that might be a problem,
+such as kafa-data or postgres.  If that doesn't work, remove them all and then recreate and
+populate as mentioned in the above install steps.
+
+```rm -rf /var/openbmp/*```
