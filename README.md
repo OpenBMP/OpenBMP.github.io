@@ -1,6 +1,5 @@
 ---
 title: Overview
-sort: 1
 ---
 # OpenBMP
 
