@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 sort: 2
+show_sorted: false
 ---
 
 # Getting Started with OpenBMP

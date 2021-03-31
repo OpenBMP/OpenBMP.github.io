@@ -8,9 +8,12 @@ source: "/"
 baseurl: "https://github.com/OpenBMP"
 lang: en
 
+lsi: true
+safe: true
 
 readme_index:
   with_frontmatter: true
+
 
 exclude:
   - Makefile

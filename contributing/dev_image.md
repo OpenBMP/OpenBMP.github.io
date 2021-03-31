@@ -1,9 +1,7 @@
 ---
 title: Developer Image
-excerpt: Developer Image 
-nav_order: 7
-nav_exclude: false
-search_exclude: false
+sort: 7
+show_sorted: false
 ---
 # OpenBMP Developer Image
 
