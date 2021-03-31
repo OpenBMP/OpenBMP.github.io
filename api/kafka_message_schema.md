@@ -1,7 +1,7 @@
 ---
 title: Kafka Message Schema
 excerpt: Kafka Message Schema
-nav_order: 2
+nav_order: 5
 nav_exclude: false
 search_exclude: false
 ---
