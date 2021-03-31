@@ -3,8 +3,7 @@ title: OpenBMP
 
 lang: en
 description: OpenBMP Documentation
-url: "https://www.openbmp.org"
-baseurl: "https://github.com/OpenBMP"
+source: "OpenBMP"
 lang: en
 
 
