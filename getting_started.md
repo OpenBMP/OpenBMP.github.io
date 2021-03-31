@@ -86,11 +86,12 @@ sudo chmod -R 7777 $OBMP_DATA_ROOT
 #### (3.b) Create sub-directories
 To keep it simple, we normally create the sub-directories under the root.  
 
-> **NOTE**
-> You can mount other partitions/slices or external disks using anyone of these paths. It is advisable
-> that you at least mount/partition both ```${OBMP_DATA_ROOT}/postgres/data``` and ```${OBMP_DATA_ROOT}/postgres/ts```
-> Postgres **data** partition doesn't require as much as **ts**. **ts** (timeseries) size depends on
-> how long you want to keep data.  The default is 4 weeks of history.
+```note
+You can mount other partitions/slices or external disks using anyone of these paths. It is advisable
+that you at least mount/partition both ```${OBMP_DATA_ROOT}/postgres/data``` and ```${OBMP_DATA_ROOT}/postgres/ts```
+Postgres **data** partition doesn't require as much as **ts**. **ts** (timeseries) size depends on
+how long you want to keep data.  The default is 4 weeks of history.
+```
 
 ```
 mkdir -p ${OBMP_DATA_ROOT}/config
@@ -111,8 +112,9 @@ Copy the grafana provisioning data from the repo to the ```${OBMP_DATA_ROOT}/gra
 cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
 ```
 
-> **NOTE**:
-> Repeat the above when grafana provisioning has changed.
+```tip
+Repeat the above when grafana provisioning has changed.
+```
 
 
 ### (5) Customize the docker-compose.yml settings
@@ -144,7 +146,9 @@ Containers will restart if they crash or if the system is rebooted.
 
 Now when you login, the home dashboard will be set.
 
-> TODO: Will try to fix this via grafana provisioning or similar.
+```warning
+**TODO:** Will try to fix this via grafana provisioning or similar.
+```
 
 
 ### (8) Verify
