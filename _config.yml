@@ -5,7 +5,7 @@ description: Documentation
 
 site_author: Tim Evens
 repo_url: 'https://github.com/openbmp'
-edit_on_github: false
+edit_on_github: true
 github_docs_folder: true
 #logo: 'https://your.url/image.png'
 #site_favicon: 'https://your.url/here.ico'
