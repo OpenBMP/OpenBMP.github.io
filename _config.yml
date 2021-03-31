@@ -8,6 +8,8 @@ url: 'https://www.openbmp.org'
 baseurl: 'https://github.com/openbmp'
 
 color_scheme: "dark"
+search_enabled: false
+
 lsi: false
 safe: true
 source: 'https://github.com/openbnmp'
