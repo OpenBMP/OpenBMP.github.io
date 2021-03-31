@@ -1,11 +1,11 @@
 ---
-title: Developer
-excerpt: Developer Information
+title: Developer Image
+excerpt: Developer Image 
 nav_order: 7
 nav_exclude: false
 search_exclude: false
 ---
-# OpenBMP Development
+# OpenBMP Developer Image
 
 OpenBMP is developed using a few programming languages with various dependencies.
 In effort to ease developers from having to build and install these dependencies,
