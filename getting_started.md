@@ -42,8 +42,8 @@ PostgreSQL.  A good starting point is to have at least **16 vCPUs**.
 
 Small deployments with less than 1M prefixes and less than 100,000 updates per day can easily run on a system
 with 4vCPUs, 4GB RAM and 80GB disk (<1000 IOPS).  Please **note** that [RPKI validator](https://github.com/RIPE-NCC/rpki-validator-3) tends to take up a bit
-of memory.  It would be better if you disabled RPKI validator for a small deployment where you have <= 4GB ram.  Surprisingly
-RPKI validator requires greater than 2GB RAM. It also is pretty CPU intensive at times.  Looking to switch RPKI validator
+of memory.  It would be better if you disabled RPKI validator for a small deployment where you have <= 4GB RAM.  Surprisingly
+RPKI validator requires greater than 2GB RAM. It is also CPU intensive at times.  OpenBMP is looking to switch RPKI validator
 for a better memory and cpu focused implementation.   
 
 ## Docker Containers
@@ -66,4 +66,44 @@ will need to configure in your postgres cluster.
 * Follow the [Docker Install](https://docs.docker.com/installation/) to install a current version of docker.  
 * Follow the [Docker Compose Install](https://docs.docker.com/compose/install/) to install a current version of docker-compose.
 
-### (2) 
+### (2) Git Clone required repos
+
+```
+git clone https://github.com/OpenBMP/obmp-docker.git
+git clone https://github.com/OpenBMP/obmp-grafana.git
+```
+
+### (3) Setup persistent storage
+You can re-use existing configurations, grafana dashboards, etc.
+
+#### (3.a) Define a root location
+Normally we place everything in ```/var/openbmp```, but you can place it anywhere.
+
+```
+export OBMP_DATA_ROOT=/var/openbmp
+sudo mkdir -p $OBMP_DATA_ROOT
+```
+
+#### (3.b) Create sub-directories
+To keep it simple, we normally create the sub-directories under the root.  
+
+> **NOTE**
+> You can mount other partitions/slices or external disks using anyone of these paths. It is advisable
+> that you at least mount/partition both ```${OBMP_DATA_ROOT}/postgres/data``` and ```${OBMP_DATA_ROOT}/postgres/ts```
+> Postgres **data** partition doesn't require as much as **ts**. **ts** (timeseries) size depends on
+> how long you want to keep data.  The default is 4 weeks of history.
+
+```
+mkdir -p ${OBMP_DATA_ROOT}/config
+mkdir -p ${OBMP_DATA_ROOT}/kafka-data
+mkdir -p ${OBMP_DATA_ROOT}/zk-data
+mkdir -p ${OBMP_DATA_ROOT}/zk-log
+mkdir -p ${OBMP_DATA_ROOT}/postgres/data
+mkdir -p ${OBMP_DATA_ROOT}/postgres/ts
+mkdir -p ${OBMP_DATA_ROOT}/grafana
+mkdir -p ${OBMP_DATA_ROOT}/grafana/dashboards
+
+sudo chmod -R 7777 $OBMP_DATA_ROOT
+```
+
+### (4) 
