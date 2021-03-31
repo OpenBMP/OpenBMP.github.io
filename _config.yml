@@ -1,22 +1,24 @@
 #theme: jekyll-theme-midnight
-remote_theme: carlosperate/jekyll-theme-rtd
+remote_theme: pmarsceill/just-the-docs
 title: OpenBMP
 description: Documentation
 
 site_author: Tim Evens
-repo_url: 'https://github.com/openbmp'
-edit_on_github: true
-github_docs_folder: true
-#logo: 'https://your.url/image.png'
-#site_favicon: 'https://your.url/here.ico'
-sticky_navigation: true
-prev_next_buttons_location: None
-prev_next_buttons_location: top
-prev_next_buttons_location: bottom
-prev_next_buttons_location: both
-search_enabled: true
-navigation_depth: 10
-#google_analytics: UA-XXXXX-Y
-#google_analytics_anonymize_ip: true
-# The highlight.js library provides 79 different colours for their syntax highlighting. The default is github-gist.
-hljs_style: github-gist
+url: 'https://www.openbmp.org'
+baseurl: 'https://github.com/openbmp'
+
+color_scheme: "dark"
+lsi: false
+safe: true
+source: 'https://github.com/openbnmp'
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+readme_index:
+  with_frontmatter: true
+
