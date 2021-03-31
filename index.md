@@ -1,3 +1,10 @@
+---
+title: OpenBMP
+excerpt: Overview
+nav_order: 1
+nav_exclude: false
+search_exclude: false
+---
 # OpenBMP
 
 OpenBMP is a BGP monitoring System.  This can be used with any compliant BMP sender (e.g., router). BGP
