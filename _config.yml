@@ -2,7 +2,7 @@
 remote_theme: pmarsceill/just-the-docs
 title: OpenBMP
 
-logo: "/images/openbmp_logo_64px.png"
+logo: "/images/obmp-github.io.png"
 
 color_scheme: "dark"
 search_enabled: true
