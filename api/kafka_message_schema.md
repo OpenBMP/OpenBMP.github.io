@@ -1,6 +1,5 @@
 ---
 title: Kafka Message Schema
-sort: 5
 ---
 
 # Kafka Message Schema
