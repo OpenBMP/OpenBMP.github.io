@@ -1,7 +1,7 @@
 ---
 title: Developer
 excerpt: Developer Information
-nav_order: 10
+nav_order: 7
 nav_exclude: false
 search_exclude: false
 ---
