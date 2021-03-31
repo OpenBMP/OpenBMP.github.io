@@ -154,6 +154,14 @@ Now when you login, the home dashboard will be set.
 You should have a similar output as below:
 
 ```
+ubuntu@obmp:~$ docker ps
+CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+f3e1e6861593        openbmp/psql-app:build-50         "/usr/sbin/run"          32 minutes ago      Up 20 minutes       0.0.0.0:8080->8080/tcp, 0.0.0.0:9005->9005/tcp   obmp-psql-app
+7a0e1393fffa        confluentinc/cp-kafka:6.0.2       "/etc/confluent/dock…"   About an hour ago   Up About an hour    0.0.0.0:9092->9092/tcp                           obmp-kafka
+f3de5896671d        grafana/grafana:latest            "/run.sh"                About an hour ago   Up About an hour    0.0.0.0:3000->3000/tcp                           obmp-grafana
+b4250fd91080        openbmp/collector:build-50        "/usr/sbin/run"          About an hour ago   Up About an hour    0.0.0.0:5000->5000/tcp                           obmp-collector
+7c8aa1766f9d        openbmp/postgres:build-50         "docker-entrypoint.s…"   About an hour ago   Up About an hour    0.0.0.0:5432->5432/tcp                           obmp-psql
+379afacb3b1d        confluentinc/cp-zookeeper:6.0.2   "/etc/confluent/dock…"   About an hour ago   Up About an hour    2181/tcp, 2888/tcp, 3888/tcp                     obmp-zookeeper
 ```
 
 You should be able to login to grafana at http://<vm ip/name>:3000/
