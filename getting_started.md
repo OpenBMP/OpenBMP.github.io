@@ -9,8 +9,7 @@ search_exclude: false
 # Getting Started with OpenBMP
 
 This guide walks through the steps to install an OpenBMP system using PostgreSQL on
-a single VM instance using docker-compose.  You should have docker and docker-compose
-already installed. 
+a single VM instance using docker-compose. 
 
 ## VM Sizing
 Sizing depends on the number of prefixes being monitored and the number of BGP updates
@@ -33,7 +32,7 @@ IOPS per second.  This works very well.   The target IOPS needed is >= 5000.
 
 Memory is not such as big deal in terms of data collection. It's more on the SQL queries that
 require a lot of memory.  The number of connections makes a **huge** difference.  If you
-plan to support many people accessing and running queries, you will need more
+plan to support many connections accessing and running queries, you will need more
 memory.  You should be able to support <= 100 concurrent connections to PostgreSQL
 with a system that has **32GB of RAM**. Responses times to queries that use indexes
 should be less than 2 seconds.  
@@ -41,6 +40,11 @@ should be less than 2 seconds.
 The number of vCPUs is also driven by the number of concurrent connections to
 PostgreSQL.  A good starting point is to have at least **16 vCPUs**.
 
+Small deployments with less than 1M prefixes and less than 100,000 updates per day can easily run on a system
+with 4vCPUs, 4GB RAM and 80GB disk (<1000 IOPS).  Please **note** that [RPKI validator](https://github.com/RIPE-NCC/rpki-validator-3) tends to take up a bit
+of memory.  It would be better if you disabled RPKI validator for a small deployment where you have <= 4GB ram.  Surprisingly
+RPKI validator requires greater than 2GB RAM. It also is pretty CPU intensive at times.  Looking to switch RPKI validator
+for a better memory and cpu focused implementation.   
 
 ## Docker Containers
 There are several docker containers defined in [docker-compose](https://github.com/OpenBMP/obmp-docker/blob/main/docker-compose.yml).
