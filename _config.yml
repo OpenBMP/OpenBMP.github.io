@@ -4,7 +4,7 @@ title: OpenBMP
 
 logo: "/images/obmp-github.io.png"
 
-color_scheme: "dark"
+#color_scheme: "dark"
 search_enabled: true
 search:
   # Split pages into sections that can be searched individually
