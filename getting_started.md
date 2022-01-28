@@ -137,32 +137,27 @@ Containers will restart if they crash or if the system is rebooted.
 * Login to grafana via http://<ip/hostname>:3000/
 * Click the link at the bottom left (above the help icon) to **Sign In**.
 * Sign in as **admin** using the password in the compose file
-* Click on the dashbard icon (middle left) and select **Manage**
-* Click on **Home** to open that dashoard
-* In the upper left, next to the dashboad name of **Home** there is a **star** icon. Click that. 
+* Click on the dashboard icon (middle left) and select **Browse**
+* Under the **General** folder, click on **OBMP-Home**
+* In the upper left, next to the dashboard name of **General/OBMP-Home** there is a **star** icon. Click that. 
 * Click on the user icon (same to sign in) and select **Preferences**
-* Under **Preferences** select **Home** from the **Home Dashboard** list. 
+* Under **Preferences** select **OBMP-Home** from the **Home Dashboard** list. 
 * Click Save. 
 
-Now when you login, the home dashboard will be set.
-
-```warning
-**TODO:** Will try to fix this via grafana provisioning or similar.
-```
-
+The OBMP-Home dashboard should not be set. 
 
 ### (8) Verify
 
 You should have a similar output as below from ```docker ps``:
 
 ```
-CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                                            NAMES
-f3e1e6861593        openbmp/psql-app:build-50         "/usr/sbin/run"          32 minutes ago      Up 20 minutes       0.0.0.0:8080->8080/tcp, 0.0.0.0:9005->9005/tcp   obmp-psql-app
-7a0e1393fffa        confluentinc/cp-kafka:6.0.2       "/etc/confluent/dock…"   About an hour ago   Up About an hour    0.0.0.0:9092->9092/tcp                           obmp-kafka
-f3de5896671d        grafana/grafana:latest            "/run.sh"                About an hour ago   Up About an hour    0.0.0.0:3000->3000/tcp                           obmp-grafana
-b4250fd91080        openbmp/collector:build-50        "/usr/sbin/run"          About an hour ago   Up About an hour    0.0.0.0:5000->5000/tcp                           obmp-collector
-7c8aa1766f9d        openbmp/postgres:build-50         "docker-entrypoint.s…"   About an hour ago   Up About an hour    0.0.0.0:5432->5432/tcp                           obmp-psql
-379afacb3b1d        confluentinc/cp-zookeeper:6.0.2   "/etc/confluent/dock…"   About an hour ago   Up About an hour    2181/tcp, 2888/tcp, 3888/tcp                     obmp-zookeeper
+CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                          NAMES
+2d83f75e71fa        confluentinc/cp-kafka:7.0.1       "/etc/confluent/dock…"   7 minutes ago       Up 7 minutes        0.0.0.0:9092->9092/tcp         obmp-kafka
+1ca92be96ffe        openbmp/psql-app:2.0.1            "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:9005->9005/tcp         obmp-psql-app
+000f4f87fb1d        grafana/grafana:8.3.4             "/run.sh"                7 minutes ago       Up 7 minutes        0.0.0.0:3000->3000/tcp         obmp-grafana
+227a427fb754        openbmp/postgres:2.0.1            "docker-entrypoint.s…"   7 minutes ago       Up 7 minutes        0.0.0.0:5432->5432/tcp         obmp-psql
+bdf6e6a376ea        openbmp/collector:2.0.1           "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:5000->5000/tcp         obmp-collector
+be1c6358d087        confluentinc/cp-zookeeper:7.0.1   "/etc/confluent/dock…"   7 minutes ago       Up 7 minutes        2181/tcp, 2888/tcp, 3888/tcp   obmp-zookeeper
 ```
 
 You should be able to login to grafana at http://<vm ip/name>:3000/
@@ -187,6 +182,34 @@ kafka-tools -b obmp-kafka:29092 print_consumer_lag openbmp.parsed.unicast_prefix
 You should see positive numbers in the offset columns and a lag normally less than a few thousand. 
 When you have a lot of peers that are all RIB dumping at the same time, the lag might be in the
 millions. This should not last too long and it should normalize where you see a lag less than 1000.
+
+
+
+###Check if Consumer is connected to Kafka
+
+```
+# Get the consumer group name - Below shows only one, which is the default obmp-psql-consumer
+ubuntu@server:~$ docker exec -it obmp-kafka kafka-consumer-groups --bootstrap-server localhost:29092 --list
+obmp-psql-consumer
+
+# Query the consumer group.  Loook for a connected host in the HOST column, next to consumer-id
+ubuntu@server:~$ docker exec -it obmp-kafka kafka-consumer-groups \
+           --bootstrap-server localhost:29092 \
+           --describe --group obmp-psql-consumer
+
+GROUP              TOPIC                         PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                             HOST            CLIENT-ID
+obmp-psql-consumer openbmp.parsed.collector      4          263             263             0               obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+obmp-psql-consumer openbmp.parsed.router         6          10              10              0               obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+obmp-psql-consumer openbmp.parsed.peer           5          6               6               0               obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+obmp-psql-consumer openbmp.parsed.ls_link        2          4733            4733            0               obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+obmp-psql-consumer openbmp.parsed.unicast_prefix 5          2550156         2550190         34              obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+obmp-psql-consumer openbmp.parsed.base_attribute 2          1211641         1211656         15              obmp-psql-consumer-0b4cdb21-7847-4bcb-a303-6fdaec0fbd46 /172.24.0.6     obmp-psql-consumer
+
+<truncated output>
+
+```
+
+
 
 ### Clear and start a container
 
