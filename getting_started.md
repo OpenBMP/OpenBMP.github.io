@@ -39,10 +39,7 @@ The number of vCPUs is also driven by the number of concurrent connections to
 PostgreSQL.  A good starting point is to have at least **16 vCPUs**.
 
 Small deployments with less than 1M prefixes and less than 100,000 updates per day can easily run on a system
-with 4vCPUs, 4GB RAM and 80GB disk (<1000 IOPS).  Please **note** that [RPKI validator](https://github.com/RIPE-NCC/rpki-validator-3) tends to take up a bit
-of memory.  It would be better if you disabled RPKI validator for a small deployment where you have <= 4GB RAM.  Surprisingly
-RPKI validator requires greater than 2GB RAM. It is also CPU intensive at times.  OpenBMP is looking to switch RPKI validator
-for a better memory and cpu focused implementation.   
+with 4vCPUs, 4GB RAM and 80GB disk (<1000 IOPS).  
 
 ## Docker Containers
 There are several docker containers defined in [OpenBMP docker-compose.yml](https://github.com/OpenBMP/obmp-docker/blob/main/docker-compose.yml).
