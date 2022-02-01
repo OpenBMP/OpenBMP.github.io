@@ -150,10 +150,10 @@ You should have a similar output as below from ```docker ps``:
 ```
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                          NAMES
 2d83f75e71fa        confluentinc/cp-kafka:7.0.1       "/etc/confluent/dock…"   7 minutes ago       Up 7 minutes        0.0.0.0:9092->9092/tcp         obmp-kafka
-1ca92be96ffe        openbmp/psql-app:2.0.1            "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:9005->9005/tcp         obmp-psql-app
+1ca92be96ffe        openbmp/psql-app:2.0.3            "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:9005->9005/tcp         obmp-psql-app
 000f4f87fb1d        grafana/grafana:8.3.4             "/run.sh"                7 minutes ago       Up 7 minutes        0.0.0.0:3000->3000/tcp         obmp-grafana
-227a427fb754        openbmp/postgres:2.0.1            "docker-entrypoint.s…"   7 minutes ago       Up 7 minutes        0.0.0.0:5432->5432/tcp         obmp-psql
-bdf6e6a376ea        openbmp/collector:2.0.1           "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:5000->5000/tcp         obmp-collector
+227a427fb754        openbmp/postgres:2.0.3            "docker-entrypoint.s…"   7 minutes ago       Up 7 minutes        0.0.0.0:5432->5432/tcp         obmp-psql
+bdf6e6a376ea        openbmp/collector:2.0.3           "/usr/sbin/run"          7 minutes ago       Up 7 minutes        0.0.0.0:5000->5000/tcp         obmp-collector
 be1c6358d087        confluentinc/cp-zookeeper:7.0.1   "/etc/confluent/dock…"   7 minutes ago       Up 7 minutes        2181/tcp, 2888/tcp, 3888/tcp   obmp-zookeeper
 ```
 
