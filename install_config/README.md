@@ -2,7 +2,7 @@
 sort: 3
 ---
 
-# Configuration
+# Install & Config
 
 {% include list.liquid all=true %}
 
