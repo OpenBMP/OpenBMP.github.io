@@ -24,20 +24,28 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
 
 2. Shutdown and remove current deployment: 
 
-   ```OMP_DATA_ROOT=${OBMP_DATA_ROOT}  docker-compose -p obmp down```
+   ```
+   OMP_DATA_ROOT=${OBMP_DATA_ROOT}  docker-compose -p obmp down
+   ```
 
 3. Get latest docker compose
 
-   ``` wget --backups=3 https://raw.githubusercontent.com/OpenBMP/obmp-docker/main/docker-compose.yml```
+   ```
+   wget --backups=3 https://raw.githubusercontent.com/OpenBMP/obmp-docker/main/docker-compose.yml
+   ```
 
 4. Update the docker-compose.yml file variables and volumes based on your previous compose file.
    You can use ```diff``` to see the differences that need to be merged/updated.
 
-    ```diff -u docker-compose.yml.1 docker-compose.yml```
+    ```
+   diff -u docker-compose.yml.1 docker-compose.yml
+   ```
 
-6. Allow DB to be reinitialized:
+5. Allow DB to be reinitialized:
 
-   ```rm -f ${OBMP_DATA_ROOT}/config/do_not_init_db```
+   ```
+   rm -f ${OBMP_DATA_ROOT}/config/do_not_init_db
+   ```
 
 7. Remove current postgres data. **Make sure the files are deleted.**. If using ```sudo```, the wildcard
    doesn't work.  You will need to use ```sudo bash -c ...``` instead. 
