@@ -85,5 +85,5 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
     on initial start.
 
     ```
-    OMP_DATA_ROOT=${OBMP_DATA_ROOT} docker-compose -p obmp up -d
+    OBMP_DATA_ROOT=${OBMP_DATA_ROOT} docker-compose -p obmp up -d
     ```  
