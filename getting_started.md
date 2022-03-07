@@ -149,13 +149,13 @@ You should have a similar output as below from ```docker ps``:
 
 ```
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                          NAMES
-1be395ea4401        confluentinc/cp-kafka:7.0.1       "/etc/confluent/dock…"   30 minutes ago      Up 30 minutes       0.0.0.0:9092->9092/tcp         obmp-kafka
-f8a7331889f4        openbmp/whois:2.1.0               "/bin/sh -c '/usr/lo…"   30 minutes ago      Up 30 minutes       0.0.0.0:4300->43/tcp           obmp-whois
-584af4f63798        openbmp/postgres:2.1.0            "docker-entrypoint.s…"   30 minutes ago      Up 30 minutes       0.0.0.0:5432->5432/tcp         obmp-psql
-b9b8d09d13ee        grafana/grafana:8.3.4             "/run.sh"                30 minutes ago      Up 30 minutes       0.0.0.0:3000->3000/tcp         obmp-grafana
-03154609cd99        confluentinc/cp-zookeeper:7.0.1   "/etc/confluent/dock…"   30 minutes ago      Up 30 minutes       2181/tcp, 2888/tcp, 3888/tcp   obmp-zookeeper
-29114c109b23        openbmp/psql-app:2.1.0            "/usr/sbin/run"          30 minutes ago      Up 30 minutes       0.0.0.0:9005->9005/tcp         obmp-psql-app
-7e97347b4ae8        openbmp/collector:2.1.0           "/usr/sbin/run"          30 minutes ago      Up 30 minutes       0.0.0.0:5000->5000/tcp         obmp-collector
+f262aee1b240        confluentinc/cp-kafka:7.0.1       "/etc/confluent/dock…"   39 minutes ago      Up 39 minutes       0.0.0.0:9092->9092/tcp         obmp-kafka
+aed91c7ef358        confluentinc/cp-zookeeper:7.0.1   "/etc/confluent/dock…"   40 minutes ago      Up 39 minutes       2181/tcp, 2888/tcp, 3888/tcp   obmp-zookeeper
+5a1add7bf676        openbmp/postgres:2.1.0            "docker-entrypoint.s…"   40 minutes ago      Up 40 minutes       0.0.0.0:5432->5432/tcp         obmp-psql
+95f011c89965        openbmp/psql-app:2.1.0            "/usr/sbin/run"          40 minutes ago      Up 39 minutes       0.0.0.0:9005->9005/tcp         obmp-psql-app
+757f03efdb10        grafana/grafana:8.3.4             "/run.sh"                40 minutes ago      Up 40 minutes       0.0.0.0:3000->3000/tcp         obmp-grafana
+61e2af0a4044        openbmp/collector:2.1.0           "/usr/sbin/run"          40 minutes ago      Up 40 minutes       0.0.0.0:5000->5000/tcp         obmp-collector
+159678da7f34        openbmp/whois:2.1.0               "/bin/sh -c '/usr/lo…"   40 minutes ago      Up 40 minutes       0.0.0.0:4300->43/tcp           obmp-whois
 ```
 
 You should be able to login to grafana at http://<vm ip/name>:3000/
