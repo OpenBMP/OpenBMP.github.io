@@ -15,9 +15,17 @@ There are several time series tables (www.timescale.com) that are configured to 
 [postgres tablespace](https://www.postgresql.org/docs/14/manage-ag-tablespaces.html) **timeseries**.  This
 tablespace is created when you first install the ```openbmp/postgres``` container. 
 
-If you are missing the timeseries tablespace, then several tables will be missing. 
+If you are missing the timeseries tablespace, then several tables will be missing.
+
+The reason for this issue is often related to permission problems with the ```${OBMP_DATA_ROOT}/postgres/ts```
+mount to the ```openbmp/postgres``` container and when using another postgres deployment. 
 
 ### Fix
+If you are hitting permission problems for ```${OBMP_DATA_ROOT}/postgres/ts``` with the ```openbmp/postgres```
+container, then you should be able to fix that by doing a ```chmod 7777 -R ${OBMP_DATA_ROOT}/postgres/ts```.  Also,
+make sure that you have ```export OBMP_DATA_ROOT=/var/openbmp``` set to the OBMP_DATA_ROOT. After fixing, you'll need
+to reinitialize the DB as indicated below.
+
 If you are not using the ```openbmp/postgres``` container, then you will need to manually
 configure the **timeseries** tablespace.  This can use the same disk/volume as main, but normally
 you would dedicate storage for the time series data to allow for larger retention times.
