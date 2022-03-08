@@ -53,7 +53,7 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
    mv ${OBMP_DATA_ROOT}/config/obmp-psql.yml ${OBMP_DATA_ROOT}/config/obmp-psql.yml.bk
    ``` 
 
-8. Remove current postgres data. **Make sure the files are deleted.**. If using ```sudo```, the wildcard
+7. Remove current postgres data. **Make sure the files are deleted.**. If using ```sudo```, the wildcard
    doesn't work.  You will need to use ```sudo bash -c ...``` instead. 
 
    ```
@@ -61,7 +61,7 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
    rm -rf ${OBMP_DATA_ROOT}/postgres/ts/*
    ```
    
-9. Remove Kafka/Zookeeper data:
+8. Remove Kafka/Zookeeper data:
 
    ```
    rm -rf ${OBMP_DATA_ROOT}/kafka-data/*
@@ -69,22 +69,22 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
    rm -rf ${OBMP_DATA_ROOT}/zk-log/*
    ```
 
-10. Update Grafana.
-    ```
-    rm -rf ${OBMP_DATA_ROOT}/grafana/plugins ${OBMP_DATA_ROOT}/grafana/alerting ${OBMP_DATA_ROOT}/grafana/grafana.db
-    rm -rf ${OBMP_DATA_ROOT}/grafana/dashboards/
-    rm -rf ${OBMP_DATA_ROOT}/grafana/provisioning/
+9. Update Grafana.
+   ```
+   rm -rf ${OBMP_DATA_ROOT}/grafana/plugins ${OBMP_DATA_ROOT}/grafana/alerting ${OBMP_DATA_ROOT}/grafana/grafana.db
+   rm -rf ${OBMP_DATA_ROOT}/grafana/dashboards/
+   rm -rf ${OBMP_DATA_ROOT}/grafana/provisioning/
    
-    git clone https://github.com/OpenBMP/obmp-grafana.git
-    # or do: git pull
+   git clone https://github.com/OpenBMP/obmp-grafana.git
+   # or do: git pull
   
-    cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
-    chmod go+xr -R ${OBMP_DATA_ROOT}/grafana/
-    ```
+   cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
+   chmod go+xr -R ${OBMP_DATA_ROOT}/grafana/
+   ```
 
-    ```danger
-     Make sure the files copied are owned by the container user. If not, provisioning will not load.
-     ```
+   ```danger
+    Make sure the files copied are owned by the container user. If not, provisioning will not load.
+    ```
    
    
 11. Start the new/upgraded version of OBMP. This will reinitialize the DB.  It does take a little time
@@ -95,12 +95,11 @@ adjust the FQDNs and ports that are used to access resources, such as Kafka and 
     ```  
 
 12. Update **obmp-psql.yml**
-
-   ```note
+    ```note
       Skip this step if you don't have a **custom obmp-psql.yml**
-   ```
+    ```
 
-   If you have a custom **obmp-psql.yml**, you can merge them to the updated file. The
-   **obmp-psql.yml** file will be created when you start ```psql-app``` container.  Run a diff
-   to the backup copy to identify the changes needed to be merged.  Once merged, restart the ```obmp-psql-app``` container.
+    If you have a custom **obmp-psql.yml**, you can merge them to the updated file. The
+    **obmp-psql.yml** file will be created when you start ```psql-app``` container.  Run a diff
+    to the backup copy to identify the changes needed to be merged.  Once merged, restart the ```obmp-psql-app``` container.
 
