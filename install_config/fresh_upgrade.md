@@ -98,7 +98,7 @@ on initial start.
 OBMP_DATA_ROOT=${OBMP_DATA_ROOT} docker-compose -p obmp up -d
 ```  
 
-12. Update **obmp-psql.yml**
+## 11) Update **obmp-psql.yml**
 ```note
 Skip this step if you don't have a **custom obmp-psql.yml**
 ```
