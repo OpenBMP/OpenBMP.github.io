@@ -49,3 +49,27 @@ OBMP_DATA_ROOT=${OBMP_DATA_ROOT} docker-compose -p obmp stop psql-app
 OBMP_DATA_ROOT=${OBMP_DATA_ROOT} docker-compose -p obmp up -d
 ```
 
+## Checkpoints occurring too frequently
+
+### Symptom
+
+The below messages are often in the logs output:
+
+```
+2022-03-08 13:41:38.169 UTC [87] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2022-03-08 13:41:54.370 UTC [87] LOG:  checkpoints are occurring too frequently (16 seconds apart)
+```
+
+### Cause
+
+The cause is the setting of **max_wal_size** being too low based on the change rate of your updates/inserts.
+The default is to have this set to **10GB**. 
+
+### Fix
+
+You can increase this by changing the value below in ```docker-compose.yml```:
+
+```
+    command: >
+      -c max_wal_size=10GB
+```

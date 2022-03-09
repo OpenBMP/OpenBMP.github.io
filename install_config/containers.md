@@ -31,6 +31,18 @@ container as a base. Configuring postgres is documented under both of the below 
 * [Postgres Container](https://hub.docker.com/_/postgres)
 * [TimescaleDB Container](https://docs.timescale.com/timescaledb/latest/how-to-guides/configuration/docker-config/)
 
+You can configure the postgres container with your own ```postgres.conf``` as documented by the first link. If you are only
+making a few changes, then you can do that via ```docker-compose.yml``` **command:** blob.  The command blob is a list of
+```-c <setting>=<value>``` entries.  Below is an example of the setting for max_wall_size.  
+
+```
+    command: >
+      -c max_wal_size=10GB
+```
+
+This will change the running instance of postgres.  It will not change the ```postgres.conf``` file. If you have a lot
+of settings to change, then it is recommended to that via the ```postgres.conf``` file. 
+
 ### TimescaleDB Tune Script
 The TimescaleDB container will configure itself using a TimescaleDB tune script. You can adjust various
 parameters. 
