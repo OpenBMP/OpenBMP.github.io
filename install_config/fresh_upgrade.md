@@ -54,35 +54,48 @@ rm -f ${OBMP_DATA_ROOT}/config/do_not_init_db
 mv ${OBMP_DATA_ROOT}/config/obmp-psql.yml ${OBMP_DATA_ROOT}/config/obmp-psql.yml.bk
 ``` 
 
-## 7) Remove current postgres data
+## 7) Remove data
 
-Remove persistent postgres data. **Make sure the files are deleted.**. If using ```sudo```, the wildcard
-doesn't work.  You will need to use ```sudo bash -c ...``` instead. 
+Remove persistent data for kafka, zookeeper, postgres and grafana.
 
+```warning
+The below does remove grafana data. Backup your grafana data first if you have custom
+changes, such as custom dashboards.  You can also delete only the provisioning data.
 ```
-rm -rf ${OBMP_DATA_ROOT}/postgres/data/*
-rm -rf ${OBMP_DATA_ROOT}/postgres/ts/*
-```
-
-## 8) Remove Kafka/Zookeeper data
 
 ```
-rm -rf ${OBMP_DATA_ROOT}/kafka-data/*
-rm -rf ${OBMP_DATA_ROOT}/zk-data/*
-rm -rf ${OBMP_DATA_ROOT}/zk-log/*
+sudo rm -rf ${OBMP_DATA_ROOT}/kafka-data
+sudo rm -rf ${OBMP_DATA_ROOT}/kafka-data
+sudo rm -rf ${OBMP_DATA_ROOT}/zk-data
+sudo rm -rf ${OBMP_DATA_ROOT}/zk-log
+sudo rm -rf ${OBMP_DATA_ROOT}/postgres/data
+sudo rm -rf ${OBMP_DATA_ROOT}/postgres/ts
+sudo rm -rf ${OBMP_DATA_ROOT}/grafana/
+
 ```
+
+## 8) Recreate the persistion data directories
+
+Create persistent data for kafka, zookeeper, and postgres.
+
+```
+
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/kafka-data
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/zk-data
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/zk-log
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/postgres/data
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/postgres/ts
+sudo mkdir -m 777 ${OBMP_DATA_ROOT}/grafana
+```
+
 
 ## 9) Update Grafana
 ```
-rm -rf ${OBMP_DATA_ROOT}/grafana/plugins ${OBMP_DATA_ROOT}/grafana/alerting ${OBMP_DATA_ROOT}/grafana/grafana.db
-rm -rf ${OBMP_DATA_ROOT}/grafana/dashboards/
-rm -rf ${OBMP_DATA_ROOT}/grafana/provisioning/
-
 git clone https://github.com/OpenBMP/obmp-grafana.git
 # or do: git pull
 
-cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
-chmod go+xr -R ${OBMP_DATA_ROOT}/grafana/
+sudo cp -r obmp-grafana/dashboards obmp-grafana/provisioning ${OBMP_DATA_ROOT}/grafana/
+sudo chmod go+xr -R ${OBMP_DATA_ROOT}/grafana/
 ```
 
 ```danger
