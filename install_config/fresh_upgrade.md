@@ -86,6 +86,8 @@ sudo mkdir -m 777 ${OBMP_DATA_ROOT}/zk-log
 sudo mkdir -m 777 ${OBMP_DATA_ROOT}/postgres/data
 sudo mkdir -m 777 ${OBMP_DATA_ROOT}/postgres/ts
 sudo mkdir -m 777 ${OBMP_DATA_ROOT}/grafana
+
+sudo chown -R 1000 ${OBMP_DATA_ROOT}/postgres ${OBMP_DATA_ROOT}/postgres/
 ```
 
 
