@@ -128,7 +128,7 @@ output{
 
 
 ## Example
-```important
+```danger
 You **MUST** set ```config.support_escapes: true``` in **logstash.yml** or via docker environment
 variable **CONFIG_SUPPORT_ESCAPES=true**
 ```
