@@ -125,3 +125,11 @@ If you have a custom **obmp-psql.yml**, you can merge them to the updated file. 
 **obmp-psql.yml** file will be created when you start ```psql-app``` container.  Run a diff
 to the backup copy to identify the changes needed to be merged.  Once merged, restart the ```obmp-psql-app``` container.
 
+## 12) Sync the global IP RIB
+
+The global IP RIB could be missing prefixes when initial RIB dumps are out of sync with the global rib cron job.
+The latest changes should not result in this problem, but in case it does the
+```sync_global_ip_rib()``` function can be used to sync the global rib.  The function can take a while to run and
+will cause a lot of extra disk IOPS. It is recommended to run it after initial RIB dumps.
+
+Run ```select sync_global_ip_rib();``` to synchronize the global IP RIB table. 

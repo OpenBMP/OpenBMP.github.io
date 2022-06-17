@@ -73,3 +73,11 @@ You can increase this by changing the value below in ```docker-compose.yml```:
     command: >
       -c max_wal_size=10GB
 ```
+
+## Global IP RIB is not updated with all prefixes
+
+The global IP RIB could be missing prefixes when initial RIB dumps are out of sync with the global rib cron job. The
+```sync_global_ip_rib()``` function can be used to sync the global rib.  The function can take a while to run and 
+will cause a lot of extra disk IOPS. It is recommended to run it after initial RIB dumps. 
+
+Run ```select sync_global_ip_rib();``` to synchronize the global IP RIB table. 
