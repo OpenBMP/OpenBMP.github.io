@@ -132,4 +132,11 @@ The latest changes should not result in this problem, but in case it does the
 ```sync_global_ip_rib()``` function can be used to sync the global rib.  The function can take a while to run and
 will cause a lot of extra disk IOPS. It is recommended to run it after initial RIB dumps.
 
-Run ```select sync_global_ip_rib();``` to synchronize the global IP RIB table. 
+
+Run the below to synchronize the global IP RIB table:
+```
+truncate global_ip_rib;
+
+select sync_global_ip_rib();
+```  
+
