@@ -65,7 +65,6 @@ changes, such as custom dashboards.  You can also delete only the provisioning d
 
 ```
 sudo rm -rf ${OBMP_DATA_ROOT}/kafka-data
-sudo rm -rf ${OBMP_DATA_ROOT}/kafka-data
 sudo rm -rf ${OBMP_DATA_ROOT}/zk-data
 sudo rm -rf ${OBMP_DATA_ROOT}/zk-log
 sudo rm -rf ${OBMP_DATA_ROOT}/postgres/data
@@ -74,7 +73,7 @@ sudo rm -rf ${OBMP_DATA_ROOT}/grafana/
 
 ```
 
-## 8) Recreate the persistion data directories
+## 8) Recreate the persistent data directories
 
 Create persistent data for kafka, zookeeper, and postgres.
 
