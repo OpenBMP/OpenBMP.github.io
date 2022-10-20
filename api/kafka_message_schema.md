@@ -6,6 +6,14 @@ title: Kafka Message Schema
 
 > **Current Version 1.7**
 
+## Minor Changes that doesn't result in schema changes
+**SEP-2022:**
+* Updated peer hash to include additional byte in the hash to indicate peering type
+  The peering type is specific to OpenBMP collector. Currently, if the peer type is
+  not local-RIB, then the peering type is unchanged.  If the peering type is for
+  Local-RIB (RFC9069), then an addtional byte of value 0x80 will be added to the hash
+  after router_hash_id. This is at the end of the hashing fields. 
+* 
 
 ## Version Changes
 
